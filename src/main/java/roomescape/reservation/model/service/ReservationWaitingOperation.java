@@ -25,10 +25,9 @@ public class ReservationWaitingOperation {
     private final ReservationWaitingValidator reservationWaitingValidator;
 
     public void waiting(Schedule schedule, Long memberId) {
-        ReservationWaitingDetails reservationWaitingDetails = createReservationWaitingDetails(schedule,
-                memberId);
         reservationValidator.validateExistenceBySchedule(schedule);
         reservationWaitingValidator.validateAlreadyWaiting(schedule, memberId);
+        ReservationWaitingDetails reservationWaitingDetails = createReservationWaitingDetails(schedule, memberId);
         ReservationWaiting reservationWaiting = ReservationWaiting.createFuture(reservationWaitingDetails);
         reservationWaitingRepository.save(reservationWaiting);
     }
