@@ -1,7 +1,5 @@
 package roomescape.reservation.model.entity;
 
-import static roomescape.reservation.model.entity.vo.ReservationWaitingStatus.ACCEPTED;
-import static roomescape.reservation.model.entity.vo.ReservationWaitingStatus.CANCELED;
 import static roomescape.reservation.model.entity.vo.ReservationWaitingStatus.PENDING;
 
 import jakarta.persistence.Column;
@@ -82,12 +80,9 @@ public class ReservationWaiting {
                 .build();
     }
 
-    public void changeToAccept() {
-        this.status = ACCEPTED;
-    }
-
-    public void changeToCancel() {
-        this.status = CANCELED;
+    public void changeStatusTo(ReservationWaitingStatus status) {
+        this.status.validateTransition(status);
+        this.status = status;
     }
 
     public void checkOwner(Long memberId) {

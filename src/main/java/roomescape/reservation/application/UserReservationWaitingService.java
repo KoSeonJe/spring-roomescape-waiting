@@ -1,5 +1,7 @@
 package roomescape.reservation.application;
 
+import static roomescape.reservation.model.entity.vo.ReservationWaitingStatus.CANCELED;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,6 @@ public class UserReservationWaitingService {
     public void cancel(Long reservationWaitingId, Long memberId) {
         ReservationWaiting reservationWaiting = reservationWaitingRepository.getById(reservationWaitingId);
         reservationWaiting.checkOwner(memberId);
-        reservationWaiting.changeToCancel();
+        reservationWaiting.changeStatusTo(CANCELED);
     }
 }

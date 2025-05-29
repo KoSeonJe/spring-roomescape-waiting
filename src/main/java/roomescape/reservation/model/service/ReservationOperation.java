@@ -1,5 +1,7 @@
 package roomescape.reservation.model.service;
 
+import static roomescape.reservation.model.entity.vo.ReservationWaitingStatus.ACCEPTED;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +43,7 @@ public class ReservationOperation {
         reservation.changeToCancel();
         reservationWaitingRepository.findFirstPendingBySchedule(reservation.getSchedule())
                 .ifPresent(reservationWaiting -> {
-            reservationWaiting.changeToAccept();
+            reservationWaiting.changeStatusTo(ACCEPTED);
             Reservation newReservation = Reservation.confirmedFromWaiting(reservationWaiting);
             reservationRepository.save(newReservation);
         });

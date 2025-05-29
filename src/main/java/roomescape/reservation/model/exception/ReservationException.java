@@ -43,4 +43,11 @@ sealed public class ReservationException extends RuntimeException {
             super(message);
         }
     }
+
+    public static final class InvalidStatusTransitionException extends ReservationException {
+
+        public InvalidStatusTransitionException(String message) {
+            super(message);
+        }
+    }
 }
