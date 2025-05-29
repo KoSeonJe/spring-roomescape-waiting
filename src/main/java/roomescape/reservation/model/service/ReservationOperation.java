@@ -36,7 +36,8 @@ public class ReservationOperation {
     }
 
     @Transactional
-    public void cancel(Reservation reservation) {
+    public void cancel(Long reservationId) {
+        Reservation reservation = reservationRepository.getById(reservationId);
         reservation.changeToCancel();
         reservationWaitingRepository.findFirstPendingBySchedule(reservation.getSchedule())
                 .ifPresent(reservationWaiting -> {

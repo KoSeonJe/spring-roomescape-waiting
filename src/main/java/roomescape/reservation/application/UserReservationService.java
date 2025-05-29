@@ -48,7 +48,7 @@ public class UserReservationService {
     public void cancel(Long id, Long memberId) {
         Reservation reservation = reservationRepository.getById(id);
         reservation.checkOwner(memberId);
-        reservationOperation.cancel(reservation);
+        reservationOperation.cancel(reservation.getId());
     }
 
     private List<UserReservationServiceResponse> createUserReservationServiceResponse(

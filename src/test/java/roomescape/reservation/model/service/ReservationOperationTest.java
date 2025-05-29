@@ -110,7 +110,7 @@ class ReservationOperationTest extends RepositoryTestSupport {
         Reservation savedReservation = reservationRepository.save(reservation);
 
         // when
-        reservationOperation.cancel(savedReservation);
+        reservationOperation.cancel(savedReservation.getId());
 
         // then
         Reservation updatedReservation = reservationRepository.findById(savedReservation.getId()).get();
@@ -129,7 +129,7 @@ class ReservationOperationTest extends RepositoryTestSupport {
         reservationWaitingRepository.save(waiting);
 
         // when
-        reservationOperation.cancel(savedReservation);
+        reservationOperation.cancel(savedReservation.getId());
 
         // then
         Optional<Reservation> newReservation = reservationRepository.getAllByStatuses(List.of(CONFIRMED)).stream()
@@ -150,7 +150,7 @@ class ReservationOperationTest extends RepositoryTestSupport {
         ReservationWaiting firstWaiting = reservationWaitingRepository.save(waiting);
 
         // when
-        reservationOperation.cancel(savedReservation);
+        reservationOperation.cancel(savedReservation.getId());
 
         // then
         ReservationWaiting reservationWaiting = reservationWaitingRepository.getById(firstWaiting.getId());
@@ -167,7 +167,7 @@ class ReservationOperationTest extends RepositoryTestSupport {
         List<Reservation> beforeReservations = reservationRepository.getAllByStatuses(List.of(CONFIRMED));
 
         // when
-        reservationOperation.cancel(savedReservation);
+        reservationOperation.cancel(savedReservation.getId());
 
         // then
         List<Reservation> afterReservations = reservationRepository.getAllByStatuses(List.of(CONFIRMED));

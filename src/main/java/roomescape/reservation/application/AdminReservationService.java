@@ -40,7 +40,6 @@ public class AdminReservationService {
 
     @Transactional
     public void cancel(Long id) {
-        Reservation reservation = reservationRepository.getById(id);
-        reservationOperation.cancel(reservation);
+        reservationOperation.cancel(id);
     }
 }
